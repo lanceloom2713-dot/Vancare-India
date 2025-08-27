@@ -3,12 +3,13 @@ const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
 const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.use(cors()); //for all
 
 app.use(
 	cors({
-		origin: ["http://localhost:3000", "https://127.0.0.1:3000"], // your frontend domain
+
+		origin: [process.env.FRONTEND_URL, "http://localhost:3000", "https://127.0.0.1:3000"], // your frontend domain
 		credentials: true,
 	})
 );
