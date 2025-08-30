@@ -156,7 +156,8 @@ export default function CategoryPage({ params: paramsPromise }: { params: Promis
                   href={`/categories/${params.category}/${subcategory.slug}`}
                   className="bg-white border-2 border-[#1F459D] rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-105"
                 >
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#1F459D] mx-auto mb-6 shadow-md">
+                  {/* 🔹 Image is now round with NO border */}
+                  <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-6 shadow-md">
                     <Image
                       src={imageUrl || "/placeholder.svg"}
                       alt={subcategory.name}
