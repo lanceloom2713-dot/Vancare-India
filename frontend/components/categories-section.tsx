@@ -145,18 +145,18 @@ export default function CategoriesGrid() {
           Explore Our Categories
         </h2>
 
-        {/* Grid with 5 columns */}
+        {/* 5 categories per row */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {categories.map((category, index) => (
             <Link key={index} href={category.href} className="group block">
-              <div className="rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white border-2 border-transparent group-hover:border-blue-500">
+              <div className="rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white border-2 border-blue-500">
                 <div className="flex justify-center mb-4">
                   <Image
                     src={category.image}
                     alt={category.name}
                     width={100}
                     height={100}
-                    className="rounded-full object-cover border-2 border-gray-200 shadow-md"
+                    className="rounded-full object-cover border-2 border-blue-500 shadow-md"
                   />
                 </div>
                 <h3 className="font-semibold text-sm leading-tight">
