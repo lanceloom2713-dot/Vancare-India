@@ -36,7 +36,7 @@ export default function CategoriesGrid() {
     },
     {
       name: "Bottle Mug Sippers",
-      href: "/categories/bottle-mugs-and-sippers",
+      href: "/categories/bottle-mugs",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTn2YKYvcltdfoiezx-ePty5eI6gb-AEL5tA&s",
     },
@@ -54,7 +54,7 @@ export default function CategoriesGrid() {
     },
     {
       name: "Pens",
-      href: "/categories/executive-pens",
+      href: "/categories/pens",
       image: "https://www.yourprint.in/wp-content/uploads/2020/01/pen-2.png",
     },
     {
