@@ -18,7 +18,7 @@ export default function CategoriesGrid() {
     },
     {
       name: "Awards & Trophies",
-      href: "/categories/awards",
+      href: "/categories/awards-and-trophies",
       image:
         "https://rukminim2.flixcart.com/image/704/844/xif0q/trophy-medal/j/o/v/1st-2nd-3rd-rank-trophy-golden-award-trophies-cup-student-winner-original-imahyatqfgmrbq8r.jpeg?q=90&crop=false",
     },
