@@ -14,9 +14,9 @@ export default function HeroSection() {
           
           {/* Left Content */}
           <div className="space-y-8 animate-in slide-in-from-left duration-700">
-            <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-[#4468c4]/40 animate-bounce">
+{/*             <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-[#4468c4]/40 animate-bounce">
               <span className="text-[#1f459d] font-medium text-sm">🎁 Premium Quality Gifts</span>
-            </div>
+            </div> */}
 
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
