@@ -1,129 +1,218 @@
 "use client";
+import { useState, useEffect, use } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { IconType } from "react-icons";
-import {
-  FaCrown,
-  FaBookOpen,
-  FaPenFancy,
-  FaKey,
-  FaAddressCard,
-  FaBox,
-  FaClock,
-  FaGift,
-  FaTrophy,
-  FaUtensils,
-  FaLightbulb,
-  FaMugHot,
-  FaTools,
-  FaShoppingBag,
-  FaHome,
-  FaWaveSquare,
-  FaVolumeUp,
-  FaWineGlassAlt,
-} from "react-icons/fa";
+import { ArrowLeft, ShoppingBag, Coffee, Pen, Package } from "lucide-react";
 
-// ✅ Category → ID mapping (from your Excel)
-const categoryIdMap: Record<string, number> = {
-  "bags": 101,
-  "candles": 102,
-  "awards-and-trophies": 103,
-  "metal-god-figures": 104,
-  "brass-and-copper-items": 105,
-  "bottle-mugs-and-sippers": 106,
-  "diaries": 107,
-  "keychains": 108,
-  "executive-pens": 109,
-  "card-holders": 110,
-  "joining-kits": 111,
-  "lunch-box": 112,
-  "clocks": 113,
-  "pen-stand": 114,
-  "electronic-gadgets": 115,
-  "kids-return-gifts": 116,
-  "showpieces": 117,
-  "premium-and-high-end-gifts": 118,
-  "diffusers": 119,
-  "speakers": 120,
-  "bar-sets": 121,
+// Categories with subcategories
+const categoriesWithSubcategories = {
+  bags: {
+    title: "Bags",
+    subcategories: [
+      { id: "bags", name: "Bags", slug: "bags", icon: ShoppingBag },
+      { id: "duffle-bags", name: "Duffle Bags", slug: "duffle-bags", icon: Package },
+      { id: "jute-bags", name: "Jute Bags", slug: "jute-bags", icon: ShoppingBag },
+      { id: "laptop-bags", name: "Laptop Bags", slug: "laptop-bags", icon: ShoppingBag },
+      { id: "side-bags", name: "Side Bags", slug: "side-bags", icon: ShoppingBag },
+    ],
+  },
+  "bottle-mugs-sipper": {
+    title: "Bottle, Mugs & Sipper",
+    subcategories: [
+      { id: "bottle", name: "Bottles", slug: "bottle", icon: Coffee },
+      { id: "mugs", name: "Mugs", slug: "mugs", icon: Coffee },
+      { id: "sippers", name: "Sippers", slug: "sippers", icon: Coffee },
+      { id: "tumblers", name: "Tumblers", slug: "tumblers", icon: Coffee },
+    ],
+  },
+  "executive-pens": {
+    title: "Executive pens",
+    subcategories: [
+      { id: "plastic-pens", name: "Plastic Pens", slug: "plastic-pens", icon: Pen },
+      { id: "metal-pens", name: "Metal Pens", slug: "metal-pens", icon: Pen },
+    ],
+  },
 };
 
-// Category data
-const categories: {
-  name: string;
-  slug: string;
-  icon: IconType;
-}[] = [
-  { name: "Bags", slug: "bags", icon: FaShoppingBag },
-  { name: "Candles", slug: "candles", icon: FaLightbulb },
-  { name: "Awards & Trophies", slug: "awards-and-trophies", icon: FaTrophy },
-  { name: "Metal God figures", slug: "metal-god-figures", icon: FaCrown },
-  { name: "Brass & Copper items", slug: "brass-and-copper-items", icon: FaTools },
-  { name: "Bottle, Mugs & Sippers", slug: "bottle-mugs-and-sippers", icon: FaMugHot },
-  { name: "Diaries", slug: "diaries", icon: FaBookOpen },
-  { name: "Keychains", slug: "keychains", icon: FaKey },
-  { name: "Executive pens", slug: "executive-pens", icon: FaPenFancy },
-  { name: "Card holders", slug: "card-holders", icon: FaAddressCard },
-  { name: "Joining kits", slug: "joining-kits", icon: FaBox },
-  { name: "Lunch box", slug: "lunch-box", icon: FaUtensils },
-  { name: "Clocks", slug: "clocks", icon: FaClock },
-  { name: "Pen stand", slug: "pen-stand", icon: FaPenFancy },
-  { name: "Electronic gadgets", slug: "electronic-gadgets", icon: FaTools },
-  { name: "Kids return gifts", slug: "kids-return-gifts", icon: FaGift },
-  { name: "Showpieces", slug: "showpieces", icon: FaHome },
-  { name: "Premium & High end gifts", slug: "premium-and-high-end-gifts", icon: FaGift },
-  { name: "Diffusers", slug: "diffusers", icon: FaWaveSquare },
-  { name: "Speakers", slug: "speakers", icon: FaVolumeUp },
-  { name: "Bar sets", slug: "bar-sets", icon: FaWineGlassAlt },
-];
+// ✅ Category ID map (from your Excel)
+const categoryIdMap: { [key: string]: string } = {
+  "speaker": "04d79c61-faca-4747-9954-74c514909f74",
+  "pen-stand": "1ea4b924-6ea3-48fd-a870-d2dc94335bff",
+  "table-top": "2d37b18b-0573-4009-afe4-3f0ebf2f0a7e",
+  "difuser": "32d4fd21-9195-4f4a-b150-12d37df439a9",
+  "clocks": "3907361c-5f54-44ef-a10c-f7551e08eb36",
+  "card-holder": "39c8cc2b-67a3-4894-b6e8-90ea6080d8f7",
+  "candles": "61407af9-d8de-4a3e-bf32-fd25e50d09ae",
+  "brass-and-copper": "64206b45-edf3-432a-bf3b-e51564ae5286",
+  "permium-high-end": "6bfee080-51bf-4bfc-b18f-16a77379350c",
+  "bar-sets": "747d8629-c84d-480f-85af-58172e2dd42e",
+  "electronic-gadgets": "800f2b8a-ca6d-45b5-aeec-316155857fba",
+  "lunch-boxes": "811434c6-6fd5-453b-a2a9-6c5967d4db3b",
+  "joining-kits": "90e71fe5-4106-472f-87ce-b5e6ef23fa86",
+  "traophies-and-mementos": "ab528481-b16f-46cc-a0d0-721c4312653f",
+  "metal-god-figures": "b1362612-05ee-4f25-9e1c-ef1ed1ca95a3",
+  "showpieces": "b1adae1c-d7a1-4c1b-acd9-90cb857c33f8",
+  "pens": "bb11c59b-62c2-4e10-ae16-01d54220d8de",
+  "kids-return-gift": "be06e51e-5f7f-413b-9a23-7b8461e8e689",
+  "bags": "cbfb30b9-33b1-4db0-a9cc-c6388359e230",
+  "diaries": "edc0f6d8-3d13-47ad-b456-3c1dcf15f1b3",
+  "bottle-mugs-sipper": "f98be9f9-6a7c-4c12-86aa-66fd3e08b6dc",
+  "keychain": "2c581307-099f-4f12-9d8f-74910bd77e2d",
+};
 
-export default function CategoriesGrid() {
+interface Product {
+  id: number | string;
+  imageUrl?: string;
+  image?: string;
+  url?: string;
+}
+
+interface CategoryData {
+  [key: string]: Product[] | null;
+}
+
+export default function CategoryPage({
+  params: paramsPromise,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const params = use(paramsPromise);
+  const [fetchedProducts, setFetchedProducts] = useState<CategoryData>({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      const categorySlug = params.category;
+      const categoryId = categoryIdMap[categorySlug];
+
+      if (
+        categoriesWithSubcategories[
+          categorySlug as keyof typeof categoriesWithSubcategories
+        ] ||
+        !categoryId
+      ) {
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/by-category/${categoryId}`,
+          { method: "GET", headers: { "Content-Type": "application/json" } }
+        );
+
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+
+        setFetchedProducts((prev) => ({ ...prev, [categorySlug]: data }));
+      } catch (error) {
+        console.error(`Error fetching products for ${categorySlug}:`, error);
+        setFetchedProducts((prev) => ({ ...prev, [categorySlug]: [] }));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (!fetchedProducts[params.category]) {
+      fetchCategoryData();
+    }
+  }, [params.category, fetchedProducts]);
+
+  const categoryWithSubs =
+    categoriesWithSubcategories[params.category as keyof typeof categoriesWithSubcategories];
+  const categoryTitle = categoryWithSubs?.title || params.category;
+
+  if (categoryWithSubs) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+                <ArrowLeft className="h-5 w-5" />
+                Back to Home
+              </Link>
+            </div>
+            <div className="mt-4">
+              <h1 className="text-3xl font-bold text-gray-900">{categoryWithSubs.title}</h1>
+              <p className="text-gray-600 mt-2">Choose a subcategory to explore our products</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categoryWithSubs.subcategories.map((subcategory) => {
+              const IconComponent = subcategory.icon;
+              return (
+                <Link
+                  key={subcategory.id}
+                  href={`/categories/${params.category}/${subcategory.slug}`}
+                  className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-105"
+                >
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <IconComponent className="h-10 w-10 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900">{subcategory.name}</h3>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const productsToDisplay = fetchedProducts[params.category];
+
+  if (isLoading || !productsToDisplay) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p>Loading products for {categoryTitle}...</p>
+      </div>
+    );
+  }
+
+  if (productsToDisplay.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p>No products found for this category.</p>
+      </div>
+    );
+  }
+
   return (
-    <div id="categories" className="container mx-auto px-6 py-10">
-      <h2 className="text-2xl font-bold text-center mb-10">Specialized Categories</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {categories.map((category, index) => {
-          const IconComponent = category.icon as React.ComponentType<{ className?: string }>;
-
-          const cols = 4;
-          const row = Math.floor(index / cols);
-          const col = index % cols;
-          const isDark = (row + col) % 2 === 0;
-
-          const darkBlue = "#1f459d";
-          const lightBlue = "#8ba9e6";
-          const bgColor = isDark ? darkBlue : lightBlue;
-          const hoverColor = isDark ? "#2a56b5" : "#a6bdf0";
-
-          return (
-            <Link
-              key={index}
-              href={`/categories/${category.slug}?id=${categoryIdMap[category.slug]}`}
-              className="group block"
-            >
-              <div
-                className="rounded-2xl p-6 text-center transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                style={{
-                  backgroundColor: bgColor,
-                  color: isDark ? "#fff" : "#000",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = hoverColor)}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = bgColor)}
-              >
-                <div className="flex justify-center mb-4">
-                  <IconComponent
-                    className={`h-10 w-10 ${
-                      isDark ? "text-white" : "text-black"
-                    } group-hover:scale-110 transition-transform duration-200`}
-                  />
-                </div>
-
-                <h3 className="font-semibold text-sm leading-tight">{category.name}</h3>
-                <p className="text-xs mt-2">Click to explore options</p>
-              </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+              <ArrowLeft className="h-5 w-5" />
+              Back to Home
             </Link>
-          );
-        })}
+          </div>
+          <div className="mt-4">
+            <h1 className="text-3xl font-bold text-gray-900">{categoryTitle}</h1>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {productsToDisplay.map((product) => (
+            <div key={product.id} className="bg-white rounded-2xl overflow-hidden shadow-lg">
+              <div className="aspect-square">
+                <Image
+                  src={product.imageUrl || product.image || product.url || "/placeholder.svg"}
+                  alt="Product"
+                  width={300}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
