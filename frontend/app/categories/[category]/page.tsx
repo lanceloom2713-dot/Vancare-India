@@ -1,3 +1,5 @@
+Category:
+
 "use client";
 import { useState, useEffect, use } from "react";
 import { notFound } from "next/navigation";
@@ -202,9 +204,11 @@ export default function CategoryPage({ params: paramsPromise }: { params: Promis
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 					{productsToDisplay.map((product) => (
-						<div
+						<Link
 							key={product.id}
-							className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+							href={product.imageUrl || "/placeholder.svg"}
+							target="_blank"
+							className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
 						>
 							<div className="aspect-square">
 								<Image
@@ -215,7 +219,7 @@ export default function CategoryPage({ params: paramsPromise }: { params: Promis
 									className="w-full h-full object-cover"
 								/>
 							</div>
-						</div>
+						</Link>
 					))}
 				</div>
 			</div>
