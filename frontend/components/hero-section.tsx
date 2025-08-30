@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 export default function HeroSection() {
@@ -26,19 +25,19 @@ export default function HeroSection() {
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
                 From our curated collections to your valued clients and employees, Vancare India brings you premium
-                corporate gifting solutions that reflect elegance and thoughtfulness.
+                corporate gifting solutions that reflect elegance and thoughtfulness. Each gift is a symbol of
+                appreciation, crafted to leave a lasting impression with unmatched quality and style.
               </p>
             </div>
 
-            {/* ✅ Redirect to categories page */}
-            <Link href="/categories">
-              <Button
-                size="lg"
-                className="bg-[#1f459d] hover:bg-[#4468c4] text-white px-8 py-3 rounded-full text-base font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                Explore our Products
-              </Button>
-            </Link>
+            {/* ✅ Scroll to categories on same page */}
+            <Button
+              size="lg"
+              className="bg-[#1f459d] hover:bg-[#4468c4] text-white px-8 py-3 rounded-full text-base font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              onClick={() => document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Explore our Products
+            </Button>
           </div>
 
           {/* Right Image */}
