@@ -12,8 +12,8 @@ export default function HomePage() {
 		<div className="min-h-screen">
 			<Navbar />
 			<HeroSection />
-			<AboutSection />
 			<CategoriesSection />
+			<AboutSection />
 			<Footer />
 			<WhatsAppPopup />
 		</div>
