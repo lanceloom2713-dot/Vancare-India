@@ -30,13 +30,13 @@ export default function CategoriesGrid() {
     },
     {
       name: "Brass & Copper Items",
-      href: "/categories/brass-copper",
+      href: "/categories/brass-and-copper-items",
       image:
         "https://ashtok.com/cdn/shop/products/Dryfruitplatewith6box_1024x1024.jpg?v=1670499015",
     },
     {
       name: "Bottle Mug Sippers",
-      href: "/categories/bottle-mugs",
+      href: "/categories/bottle-mugs-and-sippers",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTn2YKYvcltdfoiezx-ePty5eI6gb-AEL5tA&s",
     },
@@ -54,7 +54,7 @@ export default function CategoriesGrid() {
     },
     {
       name: "Pens",
-      href: "/categories/pens",
+      href: "/categories/executive-pens",
       image: "https://www.yourprint.in/wp-content/uploads/2020/01/pen-2.png",
     },
     {
