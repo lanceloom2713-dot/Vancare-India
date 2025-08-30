@@ -124,9 +124,11 @@ export default function SubcategoryPage({ params: paramsPromise }: { params: Pro
 					{productsToDisplay.map((product) => {
 						// console.log(product); // Debugging line to check product data
 						return (
-							<div
+							<Link
 								key={product.id}
-								className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-blue-100"
+								href={product.imageUrl || "/placeholder.svg"}
+								target="_blank"
+								className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border border-blue-100"
 							>
 								<div className="aspect-square">
 									<Image
@@ -137,7 +139,7 @@ export default function SubcategoryPage({ params: paramsPromise }: { params: Pro
 										className="w-full h-full object-cover"
 									/>
 								</div>
-							</div>
+							</Link>
 						);
 					})}
 				</div>
