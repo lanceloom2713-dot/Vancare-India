@@ -43,7 +43,7 @@ export default function HeroSection() {
           {/* Right Image */}
           <div className="relative animate-in slide-in-from-right duration-700 delay-300">
             <Image
-              src="/images/corporate-gifts-hero.png"
+              src="/images/HERO PAGE.webp"
               alt="Premium Corporate Gift Boxes"
               width={600}
               height={400}
