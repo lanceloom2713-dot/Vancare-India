@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import HeroSection from "@/components/hero-section";
 import CategoriesSection from "@/components/categories-section";
 import AboutSection from "@/components/about-section";
+import ClientSection from "@/components/client";   // 👈 Import new component
 import Footer from "@/components/footer";
 import WhatsAppPopup from "@/components/whatsapp-popup";
 
@@ -14,6 +15,7 @@ export default function HomePage() {
 			<HeroSection />
 			<CategoriesSection />
 			<AboutSection />
+			<ClientSection />    {/* 👈 Insert Clients Section here */}
 			<Footer />
 			<WhatsAppPopup />
 		</div>
