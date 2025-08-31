@@ -114,7 +114,7 @@ export default function Navbar() {
                 <Menu className="h-7 w-7 text-gray-900" />
               </SheetTrigger>
               <SheetContent side="left" className="w-72">
-                <div className="flex flex-col mt-6">
+                <div className="flex flex-col mt-6 px-4">
                   <Link
                     href="/"
                     className="text-gray-900 text-lg font-medium hover:text-[#1f459d] py-2"
