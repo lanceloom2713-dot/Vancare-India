@@ -10,7 +10,7 @@ export default function HeroSection() {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = scrollRef.current.clientWidth // dynamic based on container width
+      const scrollAmount = scrollRef.current.clientWidth
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -69,7 +69,7 @@ export default function HeroSection() {
             {/* Scrollable container */}
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto space-x-4 p-2 border-4 border-[#1f459d] rounded-2xl scrollbar-hide scroll-smooth"
+              className="flex overflow-x-auto space-x-4 p-2 scrollbar-hide scroll-smooth"
             >
               {["hero1.png", "hero2.png", "hero3.png", "hero4.png", "hero5.png"].map((img, index) => (
                 <div key={index} className="flex-shrink-0 w-[500px] h-[350px] relative">
@@ -77,7 +77,7 @@ export default function HeroSection() {
                     src={`/images/${img}`}
                     alt={`Hero Image ${index + 1}`}
                     fill
-                    className="object-cover rounded-xl"
+                    className="object-cover rounded-2xl border-4 border-[#1f459d]"
                   />
                 </div>
               ))}
