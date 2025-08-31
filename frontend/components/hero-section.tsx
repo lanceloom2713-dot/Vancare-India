@@ -8,10 +8,9 @@ import { useRef } from "react"
 export default function HeroSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  // scroll function
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 620 // adjust based on image width
+      const scrollAmount = scrollRef.current.clientWidth // dynamic based on container width
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -41,7 +40,6 @@ export default function HeroSection() {
               </p>
             </div>
 
-            {/* ✅ Scroll to categories on same page */}
             <Button
               size="lg"
               className="bg-[#1f459d] hover:bg-[#4468c4] text-white px-8 py-3 rounded-full text-base font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -51,7 +49,7 @@ export default function HeroSection() {
             </Button>
           </div>
 
-          {/* ✅ Right Side Scrollable Images with Arrows */}
+          {/* Right Side Scrollable Images */}
           <div className="relative animate-in slide-in-from-right duration-700 delay-300">
             {/* Scroll buttons */}
             <button
@@ -74,13 +72,12 @@ export default function HeroSection() {
               className="flex overflow-x-auto space-x-4 p-2 border-4 border-[#1f459d] rounded-2xl scrollbar-hide scroll-smooth"
             >
               {["hero1.png", "hero2.png", "hero3.png", "hero4.png", "hero5.png"].map((img, index) => (
-                <div key={index} className="flex-shrink-0 w-[600px] h-[400px]">
+                <div key={index} className="flex-shrink-0 w-[500px] h-[350px] relative">
                   <Image
                     src={`/images/${img}`}
                     alt={`Hero Image ${index + 1}`}
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-cover rounded-xl"
+                    fill
+                    className="object-cover rounded-xl"
                   />
                 </div>
               ))}
