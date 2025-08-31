@@ -62,7 +62,7 @@ const categoryIdMap: { [key: string]: string } = {
   "joining-kits": "90e71fe5-4106-472f-87ce-b5e6ef23fa86",
   "lunch-box": "811434c6-6fd5-453b-a2a9-6c5967d4db3b",
   clocks: "3907361c-5f54-44ef-a10c-f7551e08eb36",
-  "pen-stand": "bb11c59b-62c2-4e10-ae16-01d54220d8de",
+  "pen-stand": "1ea4b924-6ea3-48fd-a870-d2dc94335bff",
   "electronic-gadgets": "800f2b8a-ca6d-45b5-aeec-316155857fba",
   "kids-return-gifts": "be06e51e-5f7f-413b-9a23-7b8461e8e689",
   showpieces: "b1adae1c-d7a1-4c1b-acd9-90cb857c33f8",
