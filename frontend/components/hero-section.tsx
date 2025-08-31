@@ -1,109 +1,57 @@
 "use client"
+
 import Image from "next/image"
-import Link from "next/link"
-import { ChevronDown } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
 
-const categories = [
-  "Bags",
-  "Candles",
-  "Awards & Trophies",
-  "Metal God figures",
-  "Brass & Copper items",
-  "Bottle, Mugs & Sippers",
-  "Diaries",
-  "Executive pens",
-  "Keychains",
-  "Card Holders",
-  "Joining kits",
-  "Lunch box",
-  "Clocks",
-  "Pen stand",
-  "Electronic gadgets",
-  "Kids return gifts",
-  "Showpieces",
-  "Premium & High end gifts",
-  "Diffusers",
-  "Speakers",
-  "Bar sets",
-]
-
-const generateSlug = (category: string) => {
-  return category
-    .toLowerCase()
-    .replace(/,/g, "") // Remove commas first
-    .replace(/\s+/g, "-") // Replace spaces with hyphens
-    .replace(/&/g, "and") // Replace & with "and"
-}
-
-export default function Navbar() {
-  const scrollToFooter = () => {
-    const footer = document.querySelector("footer")
-    footer?.scrollIntoView({ behavior: "smooth" })
-  }
-
+export default function HeroSection() {
   return (
-    <nav className="bg-white shadow-sm border-b sticky top-0 z-50 backdrop-blur-sm bg-white/95">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center transform hover:scale-105 transition-transform duration-200">
-              <Image
-                src="/images/vancare-logo.png"
-                alt="Vancare India"
-                width={160}
-                height={60}
-                className="h-14 w-auto"
-              />
-            </Link>
+    <section className="relative overflow-hidden py-16 lg:py-24">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#4468c4]/20 via-white to-orange-50/30"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left Content */}
+          <div className="space-y-8 animate-in slide-in-from-left duration-700">
+{/*             <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-[#4468c4]/40 animate-bounce">
+              <span className="text-[#1f459d] font-medium text-sm">🎁 Premium Quality Gifts</span>
+            </div> */}
+
+            <div className="space-y-4">
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
+                From <span className="text-[#1f459d]">Creativity</span> To{" "}
+                <span className="text-[#1f459d]">Corporate</span>
+              </h1>
+              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                From our curated collections to your valued clients and employees, Vancare India brings you premium
+                corporate gifting solutions that reflect elegance and thoughtfulness. Each gift is a symbol of
+                appreciation, crafted to leave a lasting impression with unmatched quality and style.
+              </p>
+            </div>
+
+            {/* ✅ Scroll to categories on same page */}
+            <Button
+              size="lg"
+              className="bg-[#1f459d] hover:bg-[#4468c4] text-white px-8 py-3 rounded-full text-base font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              onClick={() => document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Explore our Products
+            </Button>
           </div>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <Link
-                href="/"
-                className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 hover:scale-105"
-              >
-                Home
-              </Link>
-              <Link
-                href="#about"
-                className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 hover:scale-105"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
-                }}
-              >
-                About Us
-              </Link>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 flex items-center gap-1 hover:scale-105">
-                  Products
-                  <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 max-h-96 overflow-y-auto animate-in slide-in-from-top-2 duration-200">
-                  {categories.map((category) => (
-                    <DropdownMenuItem
-                      key={category}
-                      className="hover:bg-[#4468c4]/10 transition-colors"
-                    >
-                      <Link href={`/categories/${generateSlug(category)}`} className="w-full">
-                        {category}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <button
-                onClick={scrollToFooter}
-                className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 hover:scale-105"
-              >
-                Contact
-              </button>
-            </div>
+          {/* Right Image */}
+          <div className="relative animate-in slide-in-from-right duration-700 delay-300">
+            <Image
+              src="/images/HERO PAGE.png"
+              alt="Premium Corporate Gift Boxes"
+              width={600}
+              height={400}
+              className="w-full h-auto object-contain"
+            />
           </div>
         </div>
       </div>
-    </nav>
+    </section>
   )
 }
