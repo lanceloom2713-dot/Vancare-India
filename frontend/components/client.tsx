@@ -8,6 +8,20 @@ export default function ClientSection() {
 		"/images/client3.png",
 		"/images/client4.png",
 		"/images/client5.png",
+		"/images/client6.png",
+		"/images/client7.png",
+		"/images/client8.png",
+		"/images/client9.jpeg",
+		"/images/client10.jpeg",
+		"/images/client11.jpeg",
+		"/images/client12.jpeg",
+		"/images/client13.jpeg",
+		"/images/client14.jpeg",
+		"/images/client15.jpeg",
+		"/images/client16.jpeg",
+		"/images/client17.jpeg",
+		"/images/client18.jpeg",
+		
 	];
 
 	return (
