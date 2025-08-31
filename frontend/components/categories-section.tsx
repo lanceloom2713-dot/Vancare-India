@@ -130,7 +130,7 @@ export default function CategoriesGrid() {
   ];
 
   return (
-    <section id="categories" className="py-16 bg-gray-50">
+    <section id="categories" className="pt-8 pb-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Heading with underline */}
         <h2 className="text-3xl font-bold text-center mb-12 text-[#1F459D] relative inline-block">
