@@ -2,6 +2,14 @@
 import Image from "next/image";
 
 export default function ClientSection() {
+	const logos = [
+		"/images/client1.png",
+		"/images/client2.png",
+		"/images/client3.png",
+		"/images/client4.png",
+		"/images/client5.png",
+	];
+
 	return (
 		<section id="clients" className="py-16 bg-white">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,32 +29,42 @@ export default function ClientSection() {
 					></div>
 				</div>
 
-				{/* Logos Carousel */}
-				<div className="flex gap-8 overflow-x-auto pb-4 scrollbar-hide">
-					{[
-						"/images/client1.png",
-						"/images/client2.png",
-						"/images/client3.png",
-						"/images/client4.png",
-						"/images/client5.png",
-					].map((logo, index) => (
-						<div
-							key={index}
-							className="flex-shrink-0 w-28 h-28 rounded-full border-4 flex items-center justify-center p-2 animate-in slide-in-from-bottom duration-700 hover:scale-105 transition-transform"
-							style={{ borderColor: "oklch(38.65% 0.193 265.58)" }} // dark blue border
-						>
-							<Image
-								src={logo}
-								alt={`Client ${index + 1}`}
-								width={100}
-								height={100}
-								className="rounded-full object-contain"
-							/>
-						</div>
-					))}
+				{/* Auto-scrolling logos */}
+				<div className="overflow-hidden relative">
+					<div className="flex animate-scroll gap-8 w-max">
+						{[...logos, ...logos].map((logo, index) => (
+							<div
+								key={index}
+								className="flex-shrink-0 w-40 h-24 border-2 flex items-center justify-center p-2 bg-white"
+								style={{ borderColor: "oklch(38.65% 0.193 265.58)" }} // dark blue border
+							>
+								<Image
+									src={logo}
+									alt={`Client ${index + 1}`}
+									width={120}
+									height={80}
+									className="object-contain max-h-20"
+								/>
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
+
+			{/* Custom animation style */}
+			<style jsx>{`
+				@keyframes scroll {
+					0% {
+						transform: translateX(0);
+					}
+					100% {
+						transform: translateX(-50%);
+					}
+				}
+				.animate-scroll {
+					animation: scroll 20s linear infinite;
+				}
+			`}</style>
 		</section>
 	);
 }
-
