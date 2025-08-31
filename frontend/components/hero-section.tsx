@@ -2,8 +2,23 @@
 
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useRef } from "react"
 
 export default function HeroSection() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  // scroll function
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 620 // adjust based on image width
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      })
+    }
+  }
+
   return (
     <section className="relative overflow-hidden py-16 lg:py-24">
       {/* Background gradient */}
@@ -14,10 +29,6 @@ export default function HeroSection() {
           
           {/* Left Content */}
           <div className="space-y-8 animate-in slide-in-from-left duration-700">
-{/*             <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-[#4468c4]/40 animate-bounce">
-              <span className="text-[#1f459d] font-medium text-sm">🎁 Premium Quality Gifts</span>
-            </div> */}
-
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
                 From <span className="text-[#1f459d]">Creativity</span> To{" "}
@@ -40,15 +51,40 @@ export default function HeroSection() {
             </Button>
           </div>
 
-          {/* Right Image */}
+          {/* ✅ Right Side Scrollable Images with Arrows */}
           <div className="relative animate-in slide-in-from-right duration-700 delay-300">
-            <Image
-              src="/images/HERO PAGE.png"
-              alt="Premium Corporate Gift Boxes"
-              width={600}
-              height={400}
-              className="w-full h-auto object-contain"
-            />
+            {/* Scroll buttons */}
+            <button
+              onClick={() => scroll("left")}
+              className="absolute -left-6 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md border border-[#1f459d] hover:bg-[#1f459d] hover:text-white transition"
+            >
+              <ChevronLeft className="w-6 h-6 text-[#1f459d]" />
+            </button>
+
+            <button
+              onClick={() => scroll("right")}
+              className="absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md border border-[#1f459d] hover:bg-[#1f459d] hover:text-white transition"
+            >
+              <ChevronRight className="w-6 h-6 text-[#1f459d]" />
+            </button>
+
+            {/* Scrollable container */}
+            <div
+              ref={scrollRef}
+              className="flex overflow-x-auto space-x-4 p-2 border-4 border-[#1f459d] rounded-2xl scrollbar-hide scroll-smooth"
+            >
+              {["hero1.png", "hero2.png", "hero3.png", "hero4.png", "hero5.png"].map((img, index) => (
+                <div key={index} className="flex-shrink-0 w-[600px] h-[400px]">
+                  <Image
+                    src={`/images/${img}`}
+                    alt={`Hero Image ${index + 1}`}
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-contain rounded-xl"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
