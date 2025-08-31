@@ -10,9 +10,9 @@ export default function HeroSection() {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const imageWidth = scrollRef.current.querySelector("div")?.clientWidth || 500 // exact width of one image
+      const containerWidth = scrollRef.current.clientWidth // full container width
       scrollRef.current.scrollBy({
-        left: direction === "left" ? -imageWidth : imageWidth,
+        left: direction === "left" ? -containerWidth : containerWidth,
         behavior: "smooth",
       })
     }
@@ -74,7 +74,7 @@ export default function HeroSection() {
               {["hero1.png", "hero2.png", "hero3.png", "hero4.png", "hero5.png"].map((img, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[500px] h-[350px] relative snap-center"
+                  className="flex-shrink-0 w-full h-[350px] relative snap-center"
                 >
                   <Image
                     src={`/images/${img}`}
