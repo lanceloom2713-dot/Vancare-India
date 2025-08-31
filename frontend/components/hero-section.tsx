@@ -80,7 +80,7 @@ export default function HeroSection() {
                     alt={`Hero Image ${index + 1}`}
                     width={600}
                     height={400}
-                    className="w-full h-full object-contain rounded-xl"
+                    className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
               ))}
