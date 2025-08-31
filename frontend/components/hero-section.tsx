@@ -1,93 +1,109 @@
 "use client"
-
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useRef } from "react"
+import Link from "next/link"
+import { ChevronDown } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
-export default function HeroSection() {
-  const scrollRef = useRef<HTMLDivElement>(null)
+const categories = [
+  "Bags",
+  "Candles",
+  "Awards & Trophies",
+  "Metal God figures",
+  "Brass & Copper items",
+  "Bottle, Mugs & Sippers",
+  "Diaries",
+  "Executive pens",
+  "Keychains",
+  "Card Holders",
+  "Joining kits",
+  "Lunch box",
+  "Clocks",
+  "Pen stand",
+  "Electronic gadgets",
+  "Kids return gifts",
+  "Showpieces",
+  "Premium & High end gifts",
+  "Diffusers",
+  "Speakers",
+  "Bar sets",
+]
 
-  // scroll function
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 620 // adjust based on image width
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-    }
+const generateSlug = (category: string) => {
+  return category
+    .toLowerCase()
+    .replace(/,/g, "") // Remove commas first
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/&/g, "and") // Replace & with "and"
+}
+
+export default function Navbar() {
+  const scrollToFooter = () => {
+    const footer = document.querySelector("footer")
+    footer?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section className="relative overflow-hidden py-16 lg:py-24">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#4468c4]/20 via-white to-orange-50/30"></div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Left Content */}
-          <div className="space-y-8 animate-in slide-in-from-left duration-700">
-            <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900">
-                From <span className="text-[#1f459d]">Creativity</span> To{" "}
-                <span className="text-[#1f459d]">Corporate</span>
-              </h1>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                From our curated collections to your valued clients and employees, Vancare India brings you premium
-                corporate gifting solutions that reflect elegance and thoughtfulness. Each gift is a symbol of
-                appreciation, crafted to leave a lasting impression with unmatched quality and style.
-              </p>
-            </div>
-
-            {/* ✅ Scroll to categories on same page */}
-            <Button
-              size="lg"
-              className="bg-[#1f459d] hover:bg-[#4468c4] text-white px-8 py-3 rounded-full text-base font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-              onClick={() => document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Explore our Products
-            </Button>
+    <nav className="bg-white shadow-sm border-b sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center transform hover:scale-105 transition-transform duration-200">
+              <Image
+                src="/images/vancare-logo.png"
+                alt="Vancare India"
+                width={160}
+                height={60}
+                className="h-14 w-auto"
+              />
+            </Link>
           </div>
 
-          {/* ✅ Right Side Scrollable Images with Arrows */}
-          <div className="relative animate-in slide-in-from-right duration-700 delay-300">
-            {/* Scroll buttons */}
-            <button
-              onClick={() => scroll("left")}
-              className="absolute -left-6 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md border border-[#1f459d] hover:bg-[#1f459d] hover:text-white transition"
-            >
-              <ChevronLeft className="w-6 h-6 text-[#1f459d]" />
-            </button>
-
-            <button
-              onClick={() => scroll("right")}
-              className="absolute -right-6 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md border border-[#1f459d] hover:bg-[#1f459d] hover:text-white transition"
-            >
-              <ChevronRight className="w-6 h-6 text-[#1f459d]" />
-            </button>
-
-            {/* Scrollable container */}
-            <div
-              ref={scrollRef}
-              className="flex overflow-x-auto space-x-4 p-2 border-4 border-[#1f459d] rounded-2xl scrollbar-hide scroll-smooth"
-            >
-              {["hero1.png", "hero2.png", "hero3.png", "hero4.png", "hero5.png"].map((img, index) => (
-                <div key={index} className="flex-shrink-0 w-[600px] h-[400px]">
-                  <Image
-                    src={`/images/${img}`}
-                    alt={`Hero Image ${index + 1}`}
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-cover rounded-xl"
-                  />
-                </div>
-              ))}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-8">
+              <Link
+                href="/"
+                className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 hover:scale-105"
+              >
+                Home
+              </Link>
+              <Link
+                href="#about"
+                className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 hover:scale-105"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
+                }}
+              >
+                About Us
+              </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 flex items-center gap-1 hover:scale-105">
+                  Products
+                  <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 max-h-96 overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+                  {categories.map((category) => (
+                    <DropdownMenuItem
+                      key={category}
+                      className="hover:bg-[#4468c4]/10 transition-colors"
+                    >
+                      <Link href={`/categories/${generateSlug(category)}`} className="w-full">
+                        {category}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <button
+                onClick={scrollToFooter}
+                className="text-gray-900 hover:text-[#1f459d] px-3 py-2 text-base font-medium transition-all duration-200 hover:scale-105"
+              >
+                Contact
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </nav>
   )
 }
