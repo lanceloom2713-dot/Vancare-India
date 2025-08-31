@@ -25,7 +25,7 @@ export default function ClientSection() {
 	];
 
 	return (
-		<section id="clients" className="py-8 bg-white">
+		<section id="clients" className="pt-8 pb-16 bg-white">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Heading */}
 				<div className="text-center mb-12">
