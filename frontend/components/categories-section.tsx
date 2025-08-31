@@ -106,7 +106,7 @@ export default function CategoriesGrid() {
     },
     {
       name: "Premium & High-End Gifts",
-      href: "/categories/premium-gifts",
+      href: "/categories/premium-and-high-end-gifts",
       image:
         "https://bbdgifts.com/cdn/shop/files/IMG-20240520_162613_330.webp?v=1741977324",
     },
