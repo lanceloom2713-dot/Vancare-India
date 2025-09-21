@@ -127,7 +127,6 @@ export default function SubcategoryPage({ params: paramsPromise }: { params: Pro
 							<Link
 								key={product.id}
 								href={product.imageUrl || "/placeholder.svg"}
-{/* 								target="_blank" */}
 								className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer border border-blue-100"
 							>
 								<div className="aspect-square">
