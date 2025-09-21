@@ -221,7 +221,6 @@ export default function CategoryPage({ params: paramsPromise }: { params: Promis
             <Link
               key={product.id}
               href={product.imageUrl || "/placeholder.svg"}
-{/*               target="_blank" */}
               className="bg-white border-2 border-[#1F459D] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
             >
               <div className="aspect-square">
