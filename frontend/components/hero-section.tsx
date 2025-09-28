@@ -71,7 +71,7 @@ export default function HeroSection() {
               ref={scrollRef}
               className="flex overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
             >
-              {["hero1.png", "hero2.png", "hero3.png", "hero4.png", "hero5.png","hero6.png", "hero7.png", "hero8.png","hero9.png","hero10.png"].map((img, index) => (
+              {["hero11.png", "hero12.png", "hero13.png", "hero14.png", "hero15.png","hero16.png", "hero17.png", "hero18.png","hero19.png","hero20.png"].map((img, index) => (
                 <div
                   key={index}
                   className="flex-shrink-0 w-full h-[350px] relative snap-center"
