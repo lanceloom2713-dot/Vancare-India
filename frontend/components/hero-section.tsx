@@ -71,16 +71,19 @@ export default function HeroSection() {
               ref={scrollRef}
               className="flex overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
             >
-              {["hero11.png", "hero12.png", "hero13.png", "hero14.png", "hero15.png","hero16.png", "hero17.png", "hero18.png","hero19.png","hero20.png"].map((img, index) => (
+              {[
+                "hero11.png", "hero12.png", "hero13.png", "hero14.png", "hero15.png",
+                "hero16.png", "hero17.png", "hero18.png", "hero19.png", "hero20.png"
+              ].map((img, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-full h-[350px] relative snap-center"
+                  className="flex-shrink-0 w-full h-[350px] relative snap-center bg-white flex items-center justify-center rounded-2xl border-4 border-[#1f459d]"
                 >
                   <Image
                     src={`/images/${img}`}
                     alt={`Hero Image ${index + 1}`}
                     fill
-                    className="object-cover rounded-2xl border-4 border-[#1f459d]"
+                    className="object-contain p-2"
                   />
                 </div>
               ))}
